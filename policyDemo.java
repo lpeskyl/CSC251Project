@@ -1,56 +1,66 @@
-import java.util.*; //java import
+import java.io.*; //java import
+import java.util.*;
 
 public class policyDemo
 {
-   public static void main(String[] args)
+   public static void main(String[] args) throws IOException
    {
-      Scanner scanner = new Scanner(System.in); //scanner object
+      File file = new File("PolicyInformation.txt");
       
-      //policy number 
-      System.out.print("Please enter the Policy Number: ");
-      int number = scanner.nextInt();
+      if(!file.exists())
+      {
+         System.out.println("Unable to locate file");
+         System.exit(0);
+      }
       
-      //provider name 
-      System.out.print("\nPlease enter the Provider Name: ");
-      String proName = scanner.next();
+      Scanner inputFile = new Scanner(file);
       
-      //policy holder first name 
-      System.out.print("\nPlease enter the Policy Holder's First Name: ");
-      String firstName = scanner.next();
+      String proName = "", firstName = "", lastName = "", smokingStatus = "";
+      int number = 0, age = 0; 
+      double height = 0.0, weight = 0.0;
       
-      //policy holder Last name 
-      System.out.print("\nPlease enter the Policy Holder's Last Name: ");
-      String lastName = scanner.next();
+      ArrayList<Policy> policies = new ArrayList<>();
+            
+      while(inputFile.hasNext())
+      {
+         number = inputFile.nextInt();
+         inputFile.nextLine();
+         proName = inputFile.nextLine();
+         firstName = inputFile.nextLine();
+         lastName = inputFile.nextLine();
+         age = inputFile.nextInt();
+         inputFile.nextLine();
+         smokingStatus = inputFile.nextLine();
+         height = inputFile.nextDouble();
+         weight = inputFile.nextDouble();
+         
+         if(inputFile.hasNext())
+            inputFile.nextLine();
+         if(inputFile.hasNext())
+            inputFile.nextLine();
+         
+         Policy p = new Policy(number, proName, firstName, lastName, age, smokingStatus, height, weight);
+         
+         policies.add(p);
+      }
       
-      //policy holder Age  
-      System.out.print("\nPlease enter the Policy Holder's Age: ");
-      int age = scanner.nextInt();
-      
-      //policy holder smoking status 
-      System.out.print("\nPlease enter the Policy Holder's Smoking Status: ");
-      String smokingStatus = scanner.next();
-      
-      //policy holder height 
-      System.out.print("\nPlease enter the Policy Holder's Height: ");
-      double height = scanner.nextDouble();
-      
-      //policy holder weight 
-      System.out.print("\nPlease enter the Policy Holder's Weight: ");
-      double weight = scanner.nextDouble();
-      
-      //instantiate policy object
-      Policy policy = new Policy(number, proName, firstName, lastName, age, smokingStatus, height, weight);
+      inputFile.close();      
       
       //print info
-      System.out.println("Policy Number: " + policy.getPolicyNumber());
-      System.out.println("Provider Name: " + policy.getProviderName());
-      System.out.println("Policy Holder's First Name: " + policy.getPolicyHolderFirstName());
-      System.out.println("Policy Holder's Last Name: " + policy.getPolicyHolderLastName());
-      System.out.println("Policy Holder's Age: " + policy.getPolicyHolderAge());
-      System.out.println("Policy Holder's Smoking Status: " + policy.getPolicyHolderSmokingStatus());
-      System.out.println("Policy Holder's Height: " + policy.getPolicyHolderHeight());
-      System.out.println("Policy Holder's Weight: " + policy.getPolicyHolderWeight());
-      double policyPrice = policy.calculatePolicyPrice();
-      System.out.printf("Policy Price: $%.2f \n", policyPrice);
+      for(int i = 0; i < policies.size(); i++)
+      {
+         Policy p = policies.get(i);
+         System.out.println("Policy Number: " + p.getPolicyNumber());
+         System.out.println("Provider Name: " + p.getProviderName());
+         System.out.println("Policy Holder's First Name: " + p.getPolicyHolderFirstName());
+         System.out.println("Policy Holder's Last Name: " + p.getPolicyHolderLastName());
+         System.out.println("Policy Holder's Age: " + p.getPolicyHolderAge());
+         System.out.println("Policy Holder's Smoking Status: " + p.getPolicyHolderSmokingStatus());
+         System.out.println("Policy Holder's Height: " + p.getPolicyHolderHeight());
+         System.out.println("Policy Holder's Weight: " + p.getPolicyHolderWeight());
+         double policyPrice = p.calculatePolicyPrice();
+         System.out.printf("Policy Price: $%.2f ", policyPrice);
+         System.out.println("\n");
+      }
    }
 }

@@ -10,21 +10,7 @@ public class Policy
    private double height;
    private double weight;
    private double BMI;
-   
-   //no-arg constructor
-   public Policy()
-   { 
-      int number = 0;
-      String proName = "";
-      String firstName = "";
-      String lastName = "";
-      int age = 0;
-      String smokingStatus = "";
-      double height = 0.0;
-      double weight = 0.0;
-      double BMI = 0.0;
-   }
-   
+
    /*
       yes-arg constructor
       @param num        policy number
@@ -46,6 +32,8 @@ public class Policy
       smokingStatus = sStatus;
       height = h;
       weight = w;
+      
+      BMI = calculateBMI(weight, height);
    }
    
    /*

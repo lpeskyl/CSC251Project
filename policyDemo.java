@@ -18,6 +18,7 @@ public class policyDemo
       String proName = "", firstName = "", lastName = "", smokingStatus = "";
       int number = 0, age = 0; 
       double height = 0.0, weight = 0.0;
+      int totalSmokers = 0, totalNonSmokers = 0;
       
       ArrayList<Policy> policies = new ArrayList<>();
             
@@ -56,11 +57,18 @@ public class policyDemo
          System.out.println("Policy Holder's Last Name: " + p.getPolicyHolderLastName());
          System.out.println("Policy Holder's Age: " + p.getPolicyHolderAge());
          System.out.println("Policy Holder's Smoking Status: " + p.getPolicyHolderSmokingStatus());
+         if(p.getPolicyHolderSmokingStatus().equalsIgnoreCase("smoker"))
+            totalSmokers ++;
+         else
+            totalNonSmokers ++;
          System.out.println("Policy Holder's Height: " + p.getPolicyHolderHeight());
          System.out.println("Policy Holder's Weight: " + p.getPolicyHolderWeight());
          double policyPrice = p.calculatePolicyPrice();
          System.out.printf("Policy Price: $%.2f ", policyPrice);
          System.out.println("\n");
       }
+      
+      System.out.println("The number of policies with a smoker is: " + totalSmokers);
+      System.out.println("The number of policies with a non-smoker is: " + totalNonSmokers);
    }
 }

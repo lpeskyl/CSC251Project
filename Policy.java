@@ -46,4 +46,11 @@ public class Policy
    {
       return proName;
    }
+   
+   //toString method which displays Policy fields when called
+   public String toString()
+   {
+      return String ("Policy Number: " + number +
+                     "\nProvider Name: " + proName);
+   }
 }

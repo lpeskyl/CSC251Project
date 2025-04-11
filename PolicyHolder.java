@@ -155,4 +155,16 @@ public class PolicyHolder
       //return policy price
       return policyPrice;
    }
+   
+   //toString method which displays PolicyHolder fields when called
+   public String toString()
+   {
+      return String.format("Policy Holder First Name: " + firstName +
+                           "\nPolicy Holder Last Name: " + lastName +
+                           "\nPolicy Holder Age: " + age +
+                           "\nPolicy Holder Smoking Status: " + smokingStatus +
+                           "\nPolicy Holder Height: %.2f", height +
+                           "\nPolicy Holder Weight: %.2f", weight +
+                           "\nPolicy Holder BMI: %.2f", BMI);   
+   }
 }

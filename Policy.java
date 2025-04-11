@@ -4,6 +4,10 @@ public class Policy
    private int number;
    private String proName;
 
+   //add a static field that is used to keep track 
+   //of the number of policy objects that have been created.
+   private static int policyCount = 0;
+   
    /*
       yes-arg constructor
       @param num        policy number
@@ -47,10 +51,17 @@ public class Policy
       return proName;
    }
    
+    //increments policyCount var for every instance of a policy object
+   public int getPolicyCount()
+   {
+      return policyCount++;
+   }
+   
    //toString method which displays Policy fields when called
    public String toString()
    {
-      return String ("Policy Number: " + number +
-                     "\nProvider Name: " + proName);
+      String str = ("Policy Number: " + number +
+                           "\nProvider Name: " + proName);
+      return str;
    }
 }

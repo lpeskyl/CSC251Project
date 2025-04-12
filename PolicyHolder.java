@@ -26,8 +26,16 @@ public class PolicyHolder
       this.smokingStatus = smokingStatus;
       this.height = height;
       this.weight = weight;
-      
-      this.BMI = calculateBMI(weight, height);
+   }
+   
+   public PolicyHolder(PolicyHolder object2)
+   {
+      firstName = object2.firstName;
+      lastName = object2.lastName;
+      age = object2.age;
+      smokingStatus = object2.smokingStatus;
+      height = object2.height;
+      weight = object2.weight;
    }
    
    /*
@@ -124,10 +132,9 @@ public class PolicyHolder
       @param height    policy holder height
       @return BMI    policy holder BMI     
    */
-   public double calculateBMI(double weight, double height)
+   public double calculateBMI()
    {
-      double BMI = (weight * 703) / (height * height);
-      return BMI;
+      return (weight * 703) / (height * height);
    }
    /*
       price calculation
@@ -155,16 +162,16 @@ public class PolicyHolder
       //return policy price
       return policyPrice;
    }
-   
+      
    //toString method which displays PolicyHolder fields when called
    public String toString()
    {
-      return String.format("Policy Holder First Name: " + firstName +
-                           "\nPolicy Holder Last Name: " + lastName +
-                           "\nPolicy Holder Age: " + age +
-                           "\nPolicy Holder Smoking Status: " + smokingStatus +
-                           "\nPolicy Holder Height: %.2f", height +
-                           "\nPolicy Holder Weight: %.2f", weight +
-                           "\nPolicy Holder BMI: %.2f", BMI);   
+      return String.format ("Policy Holder First Name: %s%n"+
+                           "Policy Holder Last Name: %s%n" +
+                           "Policy Holder Age: %d%n" +
+                           "Policy Holder Smoking Status: %s%n" +
+                           "Policy Holder Height: %.2f%n" +
+                           "Policy Holder Weight: %.2f%n",
+                           firstName, lastName, age, smokingStatus, height, weight, BMI);
    }
 }

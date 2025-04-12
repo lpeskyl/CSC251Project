@@ -17,7 +17,7 @@ public class policyDemo
       
       String proName = "", firstName = "", lastName = "", smokingStatus = "";
       int number = 0, age = 0; 
-      double height = 0.0, weight = 0.0;
+      double height = 0.0, weight = 0.0, BMI = 0.0;
       int totalSmokers = 0, totalNonSmokers = 0;
       
       ArrayList<Policy> policies = new ArrayList<>();
@@ -40,9 +40,10 @@ public class policyDemo
          if(inputFile.hasNext())
             inputFile.nextLine();
          
-         Policy p = new Policy(number, proName, firstName, lastName, age, smokingStatus, height, weight);
+         PolicyHolder myPolicyHolder = new PolicyHolder(firstName, lastName, age, smokingStatus, height, weight);
+         Policy myPolicy = new Policy(number, proName, myPolicyHolder);
          
-         policies.add(p);
+         policies.add(myPolicy);
       }
       
       inputFile.close();      
@@ -50,24 +51,15 @@ public class policyDemo
       //print info
       for(int i = 0; i < policies.size(); i++)
       {
-         Policy p = policies.get(i);
-         System.out.println("Policy Number: " + p.getPolicyNumber());
-         System.out.println("Provider Name: " + p.getProviderName());
-         System.out.println("Policy Holder's First Name: " + p.getPolicyHolderFirstName());
-         System.out.println("Policy Holder's Last Name: " + p.getPolicyHolderLastName());
-         System.out.println("Policy Holder's Age: " + p.getPolicyHolderAge());
-         System.out.println("Policy Holder's Smoking Status: " + p.getPolicyHolderSmokingStatus());
-         if(p.getPolicyHolderSmokingStatus().equalsIgnoreCase("smoker"))
+         System.out.println(policies.get(i));
+         if(policies.get(i).getPolicyHolder().getSmokingStatus().equalsIgnoreCase("smoker"))
             totalSmokers ++;
          else
             totalNonSmokers ++;
-         System.out.println("Policy Holder's Height: " + p.getPolicyHolderHeight());
-         System.out.println("Policy Holder's Weight: " + p.getPolicyHolderWeight());
-         double policyPrice = p.calculatePolicyPrice();
-         System.out.printf("Policy Price: $%.2f ", policyPrice);
-         System.out.println("\n");
+         System.out.println();
       }
       
+      System.out.printf("There were %d Policy objects created.\n", Policy.getPolicyCount());
       System.out.println("The number of policies with a smoker is: " + totalSmokers);
       System.out.println("The number of policies with a non-smoker is: " + totalNonSmokers);
    }
